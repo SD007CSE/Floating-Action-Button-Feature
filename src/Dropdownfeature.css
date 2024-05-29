@@ -1,0 +1,43 @@
+.custom-dropdown {
+    background-color: rgba(224, 224, 224, 1);
+    color: black;
+    width: 100%;
+    text-align: left;
+    display: block;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    position: relative;
+    padding-right: 30px; 
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+  }
+  
+  .custom-dropdown::after {
+    content: ''; 
+    background-image: url('./icons/Vectorarrow.png'); 
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    width: 12px; 
+    height: 12px; 
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; 
+  }
+
+  .custom-dropdown:hover{
+    background-color: rgba(224, 224, 224, 1);
+    color: black;
+  }
+  
+  .custom-dropdown:focus,
+  .custom-dropdown:active,
+  .custom-dropdown.show {
+    outline: none;
+    box-shadow: none;
+    background-color: rgba(224, 224, 224, 1);
+    color: black;
+  }
+  

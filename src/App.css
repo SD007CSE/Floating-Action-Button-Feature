@@ -1,16 +1,16 @@
+  * {
+  box-sizing: border-box;
+} 
+
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
 }
 
 .App-header {
@@ -22,17 +22,245 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  flex: 1;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.button-log {
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.button-log:hover {
+  background-color: #fff4;
+}
+
+
+.speed-dial-container {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 10;
+}
+
+.speed-dial-button {
+  width: 56px;
+  height: 56px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 12; 
+}
+
+.speed-dial-button img {
+  width: 100%;
+  height: 100%;
+}
+
+.speed-dial-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 12; 
+}
+
+.speed-dial-actions.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.speed-dial-actions.up {
+  bottom: 70px;
+}
+
+.speed-dial-actions.left-no-hover {
+  flex-direction: row;
+  bottom: auto;
+  top: 50%;
+  right: 70px;
+  transform: translateY(-50%);
+  gap: 10px;
+}
+
+.speed-dial-action {
+  width: 48px;
+  height: 48px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.speed-dial-action.left {
+  margin: 0 10px;
+}
+
+.speed-dial-action svg {
+  width: 100%;
+  height: 100%;
+}
+
+.speed-dial-action:hover {
+  background-color: #e0e0e0;
+}
+
+.speed-dial-action.no-hover:hover {
+  background-color: #fff;
+}
+
+.tooltip {
+  position: absolute;
+  right: 60px;
+  background-color: rgba(248, 248, 248, 1);
+  color: rgba(15, 15, 15, 1);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.speed-dial-action:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.speed-dial-action.no-hover .tooltip {
+  display: none;
+}
+
+.tooltip.always-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  gap: 32px;
+  width: 430px;
+  height: 476px;
+  background-color: #F8F8F8;
+  box-shadow: -2px 4px 16px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  border: 2px solid black;
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  z-index: 11; 
+}
+
+
+
+@media (max-width: 576px) {
+  .separator {
+    width: 100%;
+    height: 2px;
   }
-  to {
-    transform: rotate(360deg);
+  .card-displayed{
+    position: absolute;
+    top: 37%;
+  }
+
+  .speed-dial-actions.left-no-hover {
+    flex-direction: row;
+    top: 1%;
+    right: 80px; 
+    transform: none;
+  }
+
+  .speed-dial-container.logged-out .speed-dial-actions {
+    flex-direction: column;
+  }
+
+  .speed-dial-container.logged-out.card-displayed .speed-dial-actions {
+    position: absolute;
+    right: 350%;
+    flex-direction: row;
+    transform: translateX(50%);
+  }
+
+  .speed-dial-container.logged-out .speed-dial-action {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+  .overlay {
+    display: block;
+  }
+
+  .speed-dial-container {
+    position: fixed;
+    right: 40px;
+    z-index: 10;
+  }
+
+  .speed-dial-actions {
+    bottom:50%; 
+    right: 1%; 
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .speed-dial-action.left {
+    margin: 0 10px;
+  }
+  .speed-dial-container.logged-out.card-displayed {
+    position: absolute;
+    top: 14%; 
+  }
+  .tooltip.always-visible {
+    display: none;
   }
 }
+
+@media (min-width: 577px) {
+  .overlay {
+    display: none;
+  }
+}
+
+
+
